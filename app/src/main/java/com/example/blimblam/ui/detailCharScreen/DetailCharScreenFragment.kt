@@ -1,5 +1,6 @@
 package com.example.blimblam.ui.detailCharScreen
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,7 @@ class DetailCharScreenFragment : Fragment() {
 
     private val episodeTitle : String = "Episodes:\n"
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
