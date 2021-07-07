@@ -1,50 +1,43 @@
 package com.example.blimblam.ui.characters
 
-import android.view.LayoutInflater
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.blimblam.R
 import com.example.blimblam.model.Character
 import com.squareup.picasso.Picasso
 
-class CharacterAdapter() : Adapter<CharacterAdapter.CharacterHolder>() {
-    private lateinit var dataList: List<Character>
+class CharacterAdapter(var context: Context, var charList: List<Character>) : BaseAdapter() {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CharacterHolder {
-        val itemV : View = LayoutInflater.from(parent.context).inflate(R.layout.character_cardview,
-                                        parent, false)
-        return CharacterHolder(itemV)
+    override fun getCount(): Int {
+        return charList.size
     }
 
-    override fun onBindViewHolder(holder: CharacterHolder, position: Int) {
-        val currentChar : Character = dataList[position]
-        holder.characterName.text = currentChar.name
-        holder.characterStatus.text = currentChar.status
-        holder.characterOrigin.text = currentChar.origin.name
-        Picasso.get().load(currentChar.image)
-            .into(holder.characterPic)
+    override fun getItem(position: Int): Any {
+        return charList[position]
     }
 
-    override fun getItemCount(): Int {
-        return dataList.size
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
-    fun setDataList(list : List<Character>) {
-        this.dataList = list
-        notifyDataSetChanged()
-    }
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val view: View = View.inflate(context, R.layout.character_cardview, null)
+        val characterName : TextView = view.findViewById(R.id.character_name)
+        val characterStatus: TextView = view.findViewById(R.id.character_status)
+        val characterOrigin: TextView = view.findViewById(R.id.character_origin)
+        val characterPic: ImageView? = view.findViewById(R.id.character_pic)
 
-    class CharacterHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var characterName : TextView = itemView.findViewById(R.id.textViewName)
-        var characterStatus: TextView = itemView.findViewById(R.id.textViewStatus)
-        var characterOrigin: TextView = itemView.findViewById(R.id.textViewOrigin)
-        var characterPic: ImageView = itemView.findViewById(R.id.imageViewCharacter)
+        val char: Character = charList[position]
+
+        characterName.text = char.name
+        characterStatus.text = char.status
+        characterOrigin.text = char.origin.name
+        Picasso.get().load(char.image)
+                .into(characterPic)
+        return view
     }
 }

@@ -18,9 +18,10 @@ import java.io.Serializable
 
 class CharacterFragment : Fragment() {
     private lateinit var characterViewModel: CharacterViewModel
-    private lateinit var listViewAdapter: ArrayAdapter<*>
+    private lateinit var listViewAdapter: CharacterAdapter
     private lateinit var charView: ListView
     private lateinit var root: View
+
     private lateinit var loadedData: MutableLiveData<List<Character>>
 
     override fun onCreateView(
@@ -36,8 +37,7 @@ class CharacterFragment : Fragment() {
 
         loadedData.observe(viewLifecycleOwner, Observer {
             listViewAdapter = activity?.let { it1 ->
-                ArrayAdapter(it1.applicationContext,
-                        android.R.layout.simple_list_item_1, it)
+                CharacterAdapter(it1.applicationContext, it)
             }!!
             charView.adapter = listViewAdapter
         })

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    app:cardBackgroundColor="#AFDBF3"
+    app:cardCornerRadius="8dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -18,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:text="Jerry Smith"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/character_status"
@@ -27,7 +31,7 @@
             android:layout_below="@+id/character_name"
             android:layout_alignParentStart="true"
             android:layout_marginTop="20dp"
-            android:text="Human"/>
+            android:text="Human" />
 
         <TextView
             android:id="@+id/character_origin"
@@ -36,7 +40,7 @@
             android:layout_below="@+id/character_status"
             android:layout_alignParentStart="true"
             android:layout_marginTop="10dp"
-            android:text="Earth"/>
+            android:text="Earth" />
 
         <ImageView
             android:id="@+id/character_pic"
@@ -44,10 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:background="#7C4CAF50"
-            android:contentDescription="Profile Picture Here"
-            android:minWidth="300px"
-            android:minHeight="300px" />
+            android:contentDescription="@string/profile_picture_here" />
 
-        </RelativeLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
