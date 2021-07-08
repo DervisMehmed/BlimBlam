@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.blimblam.R
 import com.example.blimblam.model.Location
+import com.example.blimblam.ui.locations.detailLocationScreen.DetailLocFragment
+import java.io.Serializable
 
 class LocationsFragment : Fragment() {
     private lateinit var locationsViewModel: LocationsViewModel
@@ -37,6 +39,18 @@ class LocationsFragment : Fragment() {
                     android.R.layout.simple_list_item_1, it) }!!
             locationView.adapter = listViewAdapter
         })
+
+        locationView.setOnItemClickListener { parent, view, position, id ->
+            val fragment: Fragment = DetailLocFragment()
+            val args = Bundle()
+            args.putSerializable("obj", parent.adapter.getItem(position) as Serializable?)
+            fragment.arguments = args
+
+            parentFragmentManager
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment)
+                .commit()
+        }
         return root
     }
 }

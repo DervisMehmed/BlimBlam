@@ -39,7 +39,7 @@ class DetailEpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         viewModel = ViewModelProvider(this).get(DetailEpViewModel::class.java)
-        root = inflater.inflate(R.layout.detail_ep_fragment, container, false)
+        root = inflater.inflate(R.layout.fragment_detail_ep, container, false)
         value = this.requireArguments()
 
         char = value.getSerializable("obj") as Episode
