@@ -1,4 +1,4 @@
-package com.example.blimblam.ui.detailCharScreen
+package com.example.blimblam.ui.characters.detailCharScreen
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -39,7 +39,7 @@ class DetailCharScreenFragment : Fragment() {
     ): View {
         detailCharScreenFragment =
                 ViewModelProvider(this).get(DetailCharScreenViewModel::class.java)
-        root = inflater.inflate(R.layout.fragment_detail_screen, container, false)
+        root = inflater.inflate(R.layout.fragment_detail_char_screen, container, false)
         value = this.requireArguments()
 
         if ( value != null)

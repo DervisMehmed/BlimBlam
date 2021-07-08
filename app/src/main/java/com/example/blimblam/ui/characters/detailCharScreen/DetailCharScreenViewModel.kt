@@ -1,4 +1,4 @@
-package com.example.blimblam.ui.detailCharScreen
+package com.example.blimblam.ui.characters.detailCharScreen
 
 import android.widget.ImageView
 import androidx.lifecycle.ViewModel

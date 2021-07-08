@@ -13,6 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.blimblam.R
 import com.example.blimblam.model.Character
 import com.example.blimblam.model.Episode
+import com.example.blimblam.ui.characters.detailCharScreen.DetailCharScreenFragment
+import com.example.blimblam.ui.episodes.detailEpScreen.DetailEpFragment
+import java.io.Serializable
 
 class EpisodesFragment : Fragment() {
     private lateinit var episodesViewModel: EpisodesViewModel
@@ -38,6 +41,18 @@ class EpisodesFragment : Fragment() {
                                                 android.R.layout.simple_list_item_1, it) }!!
             episodeView.adapter = listViewAdapter
         })
+
+        episodeView.setOnItemClickListener { parent, view, position, id ->
+            val fragment: Fragment = DetailEpFragment()
+            val args = Bundle()
+            args.putSerializable("obj", parent.adapter.getItem(position) as Serializable?)
+            fragment.arguments = args
+
+            parentFragmentManager
+                .beginTransaction()
+                .replace(R.id.nav_host_fragment, fragment)
+                .commit()
+        }
         return root
     }
 }
