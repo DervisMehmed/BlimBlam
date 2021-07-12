@@ -10,14 +10,19 @@ import retrofit2.Response
 class EpisodesViewModel : ViewModel() {
     private var episodeData = MutableLiveData<List<Episode>>()
     private lateinit var call : Call<EpisodesDataDTO>
+    private lateinit var epDataDTO: EpisodesDataDTO
 
-    fun loadLiveData(): MutableLiveData<List<Episode>> {
-        this.call = getServiceCall()
+    fun loadLiveData(page: Char? = null): MutableLiveData<List<Episode>> {
+        this.call = getServiceCall(page)
         return loadData(call)
     }
 
-    private fun getServiceCall() : Call<EpisodesDataDTO> {
-        return RetrofitClient.retroInterface.getEpData()
+    fun getInfoDTO() : Info{
+        return epDataDTO.info
+    }
+
+    private fun getServiceCall(page: Char? = null) : Call<EpisodesDataDTO> {
+        return RetrofitClient.retroInterface.getEpData(page)
     }
 
     private fun loadData(call : Call<EpisodesDataDTO>) : MutableLiveData<List<Episode>> {
@@ -26,6 +31,7 @@ class EpisodesViewModel : ViewModel() {
             override fun onResponse(call: Call<EpisodesDataDTO>, response: Response<EpisodesDataDTO>) {
                 val body = response.body()
                 if (body != null) {
+                    epDataDTO = EpisodesDataDTO(body.info, body.episodeResults)
                     episodeData.value = body.episodeResults
                 }
             }

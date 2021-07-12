@@ -9,11 +9,11 @@ import retrofit2.http.Query
 
 interface GetDataService {
     @GET("/api/character")
-    fun getCharData(@Query("page") page: Int? = null): Call<CharDataDTO>
+    fun getCharData(@Query("page") page: Char? = null): Call<CharDataDTO>
 
     @GET("/api/episode")
-    fun getEpData(@Query("page") page: Int? = null): Call<EpisodesDataDTO>
+    fun getEpData(@Query("page") page: Char? = null): Call<EpisodesDataDTO>
 
     @GET("/api/location")
-    fun getLocData(@Query("page") page: Int? = null): Call<LocationDataDTO>
+    fun getLocData(@Query("page") page: Char? = null): Call<LocationDataDTO>
 }

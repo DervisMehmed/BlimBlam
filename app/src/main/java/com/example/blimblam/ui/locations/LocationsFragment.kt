@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -19,6 +20,8 @@ class LocationsFragment : Fragment() {
     private lateinit var locationsViewModel: LocationsViewModel
     private lateinit var listViewAdapter : ArrayAdapter<*>
     private lateinit var locationView: ListView
+    private lateinit var buttonBack : Button
+    private lateinit var buttonNext : Button
     private lateinit var root: View
 
     private lateinit var loadedData: MutableLiveData<List<Location>>
@@ -32,6 +35,8 @@ class LocationsFragment : Fragment() {
                 ViewModelProvider(this).get(LocationsViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_locations, container, false)
         locationView= root.findViewById(R.id.locationsListView)
+        buttonBack = root.findViewById(R.id.buttonBack)
+        buttonNext = root.findViewById(R.id.buttonNext)
         loadedData = locationsViewModel.loadLiveData()
 
         loadedData.observe(viewLifecycleOwner, Observer {
@@ -51,6 +56,24 @@ class LocationsFragment : Fragment() {
                 .replace(R.id.nav_host_fragment, fragment)
                 .commit()
         }
+
+        buttonBack.setOnClickListener(View.OnClickListener {
+            with(locationsViewModel){
+                if(getInfoDTO().prev != null){
+                    loadedData = loadLiveData(getInfoDTO().prev.last())
+                    listViewAdapter.notifyDataSetChanged()
+                }
+            }
+        })
+
+        buttonNext.setOnClickListener(View.OnClickListener {
+            with(locationsViewModel){
+                if(getInfoDTO().next != null){
+                    loadedData = loadLiveData(getInfoDTO().next.last())
+                    listViewAdapter.notifyDataSetChanged()
+                }
+            }
+        })
         return root
     }
 }

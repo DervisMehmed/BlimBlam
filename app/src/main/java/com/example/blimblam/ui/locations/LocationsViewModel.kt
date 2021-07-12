@@ -10,14 +10,19 @@ import retrofit2.Response
 class LocationsViewModel : ViewModel() {
     private var locationData = MutableLiveData<List<Location>>()
     private lateinit var call : Call<LocationDataDTO>
+    private lateinit var locDataDTO: LocationDataDTO
 
-    fun loadLiveData(): MutableLiveData<List<Location>> {
-        this.call = getServiceCall()
+    fun loadLiveData(page: Char? = null): MutableLiveData<List<Location>> {
+        this.call = getServiceCall(page)
         return loadData(call)
     }
 
-    private fun getServiceCall() : Call<LocationDataDTO> {
-        return RetrofitClient.retroInterface.getLocData()
+    fun getInfoDTO() : Info{
+        return locDataDTO.info
+    }
+
+    private fun getServiceCall(page: Char? = null) : Call<LocationDataDTO> {
+        return RetrofitClient.retroInterface.getLocData(page)
     }
 
     private fun loadData(call : Call<LocationDataDTO>) : MutableLiveData<List<Location>> {
@@ -26,6 +31,7 @@ class LocationsViewModel : ViewModel() {
             override fun onResponse(call: Call<LocationDataDTO>, response: Response<LocationDataDTO>) {
                 val body = response.body()
                 if (body != null) {
+                    locDataDTO = LocationDataDTO(body.info, body.locResults)
                     locationData.value = body.locResults
                 }
             }
