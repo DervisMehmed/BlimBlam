@@ -26,3 +26,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 }
+
+// TODO: fragment gecisleri
+// Episode detay sayfasindaki characters fotolari
+// Location detay sayfasindaki residents fotolari

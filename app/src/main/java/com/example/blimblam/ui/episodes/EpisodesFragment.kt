@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -21,6 +22,7 @@ import java.io.Serializable
 class EpisodesFragment : Fragment() {
     private lateinit var episodesViewModel: EpisodesViewModel
     private lateinit var listViewAdapter : ArrayAdapter<*>
+    private lateinit var nestedScrollView: NestedScrollView
     private lateinit var episodeView: ListView
     private lateinit var buttonBack : Button
     private lateinit var buttonNext : Button
@@ -39,6 +41,7 @@ class EpisodesFragment : Fragment() {
         episodeView = root.findViewById(R.id.episodesListView)
         buttonBack = root.findViewById(R.id.buttonBack)
         buttonNext = root.findViewById(R.id.buttonNext)
+        nestedScrollView = root.findViewById(R.id.nestedScrollView)
         loadedData = episodesViewModel.loadLiveData()
 
         loadedData.observe(viewLifecycleOwner, Observer {
