@@ -7,7 +7,7 @@
     android:background="#FDC7D7"
     tools:context=".ui.characters.CharacterFragment">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/characterListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
