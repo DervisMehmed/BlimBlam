@@ -36,6 +36,12 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewResidents"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/resident_cardview"/>
+
         <TextView
             android:id="@+id/textViewLocURL"
             android:layout_width="match_parent"

@@ -1,10 +1,12 @@
 package com.example.blimblam
 
 import com.example.blimblam.model.CharDataDTO
+import com.example.blimblam.model.Character
 import com.example.blimblam.model.EpisodesDataDTO
 import com.example.blimblam.model.LocationDataDTO
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GetDataService {
@@ -16,4 +18,7 @@ interface GetDataService {
 
     @GET("/api/location")
     fun getLocData(@Query("page") page: Char? = null): Call<LocationDataDTO>
+
+    @GET("/api/character/{number}")
+    fun getCharacter(@Path("number") number: String? = null): Call<Character>
 }
