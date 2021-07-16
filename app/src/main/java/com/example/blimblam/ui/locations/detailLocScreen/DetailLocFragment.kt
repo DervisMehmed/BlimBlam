@@ -1,4 +1,4 @@
-package com.example.blimblam.ui.locations.detailLocationScreen
+package com.example.blimblam.ui.locations.detailLocScreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.blimblam.R
 import com.example.blimblam.model.Character
 import com.example.blimblam.model.Location
-import com.example.blimblam.ui.locations.detailLocScreen.CustomAdapter
-import com.example.blimblam.ui.locations.detailLocScreen.DetailLocViewModel
 
 class DetailLocFragment : Fragment() {
     companion object {
@@ -44,7 +42,7 @@ class DetailLocFragment : Fragment() {
     ): View {
         viewModel = ViewModelProvider(this).get(DetailLocViewModel::class.java)
         root = inflater.inflate(R.layout.detail_loc_fragment, container, false)
-        gridLayoutManager = LinearLayoutManager(this.context)
+        //gridLayoutManager = LinearLayoutManager(this.context)
         value = this.requireArguments()
         char = value.getSerializable("obj") as Location
 
@@ -55,23 +53,24 @@ class DetailLocFragment : Fragment() {
             textViewResidents = findViewById(R.id.textViewLocResidents)
             textViewURL = findViewById(R.id.textViewLocURL)
             textViewCreated = findViewById(R.id.textViewLocCreated)
-            residentRecyclerView = findViewById(R.id.recyclerViewResidents)
-            residentRecyclerView.layoutManager = gridLayoutManager
+            //residentRecyclerView = findViewById(R.id.recyclerViewResidents)
+            //residentRecyclerView.layoutManager = gridLayoutManager
         }
         with(viewModel) {
             setChar(char)
             textViewName.text = getLocationName()
             textViewType.text = getLocationType()
             textViewDimension.text = getLocationDimension()
-            textViewResidents.text = characterTitle
+            textViewResidents.text = characterTitle + getLocationResidents()
             textViewURL.text = getLocationURL()
             textViewCreated.text = getLocationCreated()
-            mutableList = viewModel.loadResidents(char.residents)
+            //mutableList = viewModel.loadResidents(char.residents)
         }
-        mutableList.observe(viewLifecycleOwner, {
+        //  TODO
+        /*mutableList.observe(viewLifecycleOwner, {
             customAdapter = mutableList.value?.let { CustomAdapter(context, it) }!!
             residentRecyclerView.adapter = customAdapter
-        })
+        })*/
         return root
     }
 }

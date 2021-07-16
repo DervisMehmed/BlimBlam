@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.blimblam.R
 import com.example.blimblam.model.Character
 import com.example.blimblam.ui.characters.detailCharScreen.DetailCharScreenFragment
-import com.example.blimblam.ui.locations.detailLocationScreen.DetailLocFragment
 import com.squareup.picasso.Picasso
 import java.io.Serializable
 

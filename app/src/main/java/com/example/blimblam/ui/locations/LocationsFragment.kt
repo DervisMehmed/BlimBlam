@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.blimblam.R
 import com.example.blimblam.model.Location
-import com.example.blimblam.ui.locations.detailLocationScreen.DetailLocFragment
+import com.example.blimblam.ui.locations.detailLocScreen.DetailLocFragment
 import java.io.Serializable
 
 class LocationsFragment : Fragment() {
