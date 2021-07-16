@@ -1,5 +1,6 @@
 package com.example.blimblam.ui.locations
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.blimblam.R
 import com.example.blimblam.model.Location
-import com.example.blimblam.ui.locations.detailLocScreen.DetailLocFragment
+import com.example.blimblam.ui.detailScreen.DetailScreenActivity
 import java.io.Serializable
 
 class LocationsFragment : Fragment() {
@@ -46,15 +47,11 @@ class LocationsFragment : Fragment() {
         })
 
         locationView.setOnItemClickListener { parent, view, position, id ->
-            val fragment: Fragment = DetailLocFragment()
-            val args = Bundle()
-            args.putSerializable("obj", parent.adapter.getItem(position) as Serializable?)
-            fragment.arguments = args
-
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.nav_host_fragment, fragment)
-                .commit()
+            val context = view.context
+            val intent = Intent(context, DetailScreenActivity::class.java)
+            intent.putExtra("OBJECT", parent.adapter.getItem(position) as Serializable)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(intent)
         }
 
         buttonBack.setOnClickListener(View.OnClickListener {

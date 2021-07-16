@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="#BCFF6E"
     android:fillViewport="true"
+    android:scrollbars="vertical"
     tools:context=".ui.episodes.EpisodesFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,9 +15,8 @@
         <ListView
             android:id="@+id/episodesListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:nestedScrollingEnabled="true"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

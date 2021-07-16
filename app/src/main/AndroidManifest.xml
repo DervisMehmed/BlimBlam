@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BlimBlam">
+        <activity android:name=".ui.characters.detailCharScreen.CharDetailScreenActivity"></activity>
+        <activity android:name=".ui.detailScreen.DetailScreenActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

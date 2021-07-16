@@ -20,5 +20,5 @@ interface GetDataService {
     fun getLocData(@Query("page") page: Char? = null): Call<LocationDataDTO>
 
     @GET("/api/character/{number}")
-    fun getCharacter(@Path("number") number: String? = null): Call<Character>
+    fun getCharacter(@Path("number") number: String? = null): Call<List<Character>>
 }

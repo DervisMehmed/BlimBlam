@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#9EFFD180"
-    android:scrollbarStyle="insideOverlay">
+    android:scrollbarStyle="insideOverlay"
+    tools:context=".ui.characters.detailCharScreen.CharDetailScreenActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -92,12 +93,5 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:text="EPISODES"/>
-        <TextView
-            android:id="@+id/textViewCreated"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="32dp"
-            android:text="CREATED"/>
     </LinearLayout>
 </ScrollView>

@@ -1,5 +1,6 @@
 package com.example.blimblam.ui.episodes
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +14,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.blimblam.R
-import com.example.blimblam.model.Character
 import com.example.blimblam.model.Episode
-import com.example.blimblam.ui.characters.detailCharScreen.DetailCharScreenFragment
-import com.example.blimblam.ui.episodes.detailEpScreen.DetailEpFragment
+import com.example.blimblam.ui.detailScreen.DetailScreenActivity
 import java.io.Serializable
 
 class EpisodesFragment : Fragment() {
@@ -51,15 +50,11 @@ class EpisodesFragment : Fragment() {
         })
 
         episodeView.setOnItemClickListener { parent, view, position, id ->
-            val fragment: Fragment = DetailEpFragment()
-            val args = Bundle()
-            args.putSerializable("obj", parent.adapter.getItem(position) as Serializable?)
-            fragment.arguments = args
-
-            parentFragmentManager
-                .beginTransaction()
-                .replace(R.id.nav_host_fragment, fragment)
-                .commit()
+            val context = view.context
+            val intent = Intent(context, DetailScreenActivity::class.java)
+            intent.putExtra("OBJECT", parent.adapter.getItem(position) as Serializable)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(intent)
         }
 
         buttonBack.setOnClickListener(View.OnClickListener {

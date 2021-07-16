@@ -1,18 +1,16 @@
 package com.example.blimblam.ui.characters
 
 import android.content.Context
-import android.os.Bundle
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blimblam.R
 import com.example.blimblam.model.Character
-import com.example.blimblam.ui.characters.detailCharScreen.DetailCharScreenFragment
+import com.example.blimblam.ui.characters.detailCharScreen.CharDetailScreenActivity
 import com.squareup.picasso.Picasso
 import java.io.Serializable
 
@@ -39,14 +37,11 @@ class CharRecyclerViewAdapter(private val activity: Context?, private val arrDat
         }
 
         override fun onClick(v: View?) {
-            val fragment: Fragment = DetailCharScreenFragment()
-            val args = Bundle()
-            args.putSerializable("obj", character as Serializable?)
-            fragment.arguments = args
-            v!!.findFragment<CharacterFragment>().parentFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.nav_host_fragment, fragment)
-                    .commit()
+            val context = v?.context
+            val intent = Intent(context, CharDetailScreenActivity::class.java)
+            intent.putExtra("OBJECT", character as Serializable)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context?.startActivity(intent)
         }
     }
 
