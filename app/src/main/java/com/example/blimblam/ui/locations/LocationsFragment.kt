@@ -8,19 +8,25 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.blimblam.R
 import com.example.blimblam.model.Location
 import com.example.blimblam.ui.detailScreen.DetailScreenActivity
+import com.example.blimblam.ui.episodes.EpListCustomAdaptor
 import java.io.Serializable
 
 class LocationsFragment : Fragment() {
     private lateinit var locationsViewModel: LocationsViewModel
-    private lateinit var listViewAdapter : ArrayAdapter<*>
-    private lateinit var locationView: ListView
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var locListCustomAdaptor: LocListCustomAdapter
+    private lateinit var nestedScrollView: NestedScrollView
+    private lateinit var locationView: RecyclerView
     private lateinit var buttonBack : Button
     private lateinit var buttonNext : Button
     private lateinit var root: View
@@ -35,30 +41,24 @@ class LocationsFragment : Fragment() {
         locationsViewModel =
                 ViewModelProvider(this).get(LocationsViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_locations, container, false)
-        locationView= root.findViewById(R.id.locationsListView)
+        locationView = root.findViewById(R.id.locationsListView)
+        nestedScrollView = root.findViewById(R.id.nestedScrollView)
+        linearLayoutManager = LinearLayoutManager(this.context)
+        locationView.layoutManager = linearLayoutManager
         buttonBack = root.findViewById(R.id.buttonBack)
         buttonNext = root.findViewById(R.id.buttonNext)
         loadedData = locationsViewModel.loadLiveData()
 
         loadedData.observe(viewLifecycleOwner, Observer {
-            listViewAdapter = activity?.let { it1 -> ArrayAdapter(it1.applicationContext,
-                    android.R.layout.simple_list_item_1, it) }!!
-            locationView.adapter = listViewAdapter
+            locListCustomAdaptor = loadedData.value?.let { LocListCustomAdapter(this.activity, it)}!!
+            locationView.adapter = locListCustomAdaptor
         })
-
-        locationView.setOnItemClickListener { parent, view, position, id ->
-            val context = view.context
-            val intent = Intent(context, DetailScreenActivity::class.java)
-            intent.putExtra("OBJECT", parent.adapter.getItem(position) as Serializable)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            context.startActivity(intent)
-        }
 
         buttonBack.setOnClickListener(View.OnClickListener {
             with(locationsViewModel){
                 if(getInfoDTO().prev != null){
                     loadedData = loadLiveData(getInfoDTO().prev.last())
-                    listViewAdapter.notifyDataSetChanged()
+                    locListCustomAdaptor.notifyDataSetChanged()
                 }
             }
         })
@@ -67,7 +67,7 @@ class LocationsFragment : Fragment() {
             with(locationsViewModel){
                 if(getInfoDTO().next != null){
                     loadedData = loadLiveData(getInfoDTO().next.last())
-                    listViewAdapter.notifyDataSetChanged()
+                    locListCustomAdaptor.notifyDataSetChanged()
                 }
             }
         })
