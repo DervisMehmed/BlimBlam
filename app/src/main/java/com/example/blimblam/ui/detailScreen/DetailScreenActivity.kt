@@ -42,7 +42,7 @@ class DetailScreenActivity : AppCompatActivity() {
         textView3 = findViewById(R.id.textView3)
         textViewResidents = findViewById(R.id.textViewCharTag)
         residentRecyclerView = findViewById(R.id.recyclerViewResidents)
-        gridLayoutManager = GridLayoutManager(applicationContext, 4)
+        gridLayoutManager = GridLayoutManager(applicationContext, 3)
         residentRecyclerView.layoutManager = gridLayoutManager
 
         if( intent.extras?.get("OBJECT") is Episode){
@@ -76,7 +76,7 @@ class DetailScreenActivity : AppCompatActivity() {
         getEpResidents()
     }
 
-    fun getLocationResidents(){
+    private fun getLocationResidents(){
         tempString = objLoc.residents.joinToString(",")
         tempString = tempString.filter { it.isDigit() || it == ',' }
         this.call = RetrofitClient.retroInterface
@@ -84,7 +84,7 @@ class DetailScreenActivity : AppCompatActivity() {
         loadData(call)
     }
 
-    fun getEpResidents(){
+    private fun getEpResidents(){
         tempString = objEp.characters.joinToString(",")
         tempString = tempString.filter { it.isDigit() || it == ',' }
         this.call = RetrofitClient.retroInterface
