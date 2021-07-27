@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blimblam.R
@@ -24,6 +25,7 @@ import java.io.Serializable
 class LocationsFragment : Fragment() {
     private lateinit var locationsViewModel: LocationsViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var locListCustomAdaptor: LocListCustomAdapter
     private lateinit var nestedScrollView: NestedScrollView
     private lateinit var locationView: RecyclerView
@@ -43,8 +45,8 @@ class LocationsFragment : Fragment() {
         root = inflater.inflate(R.layout.fragment_locations, container, false)
         locationView = root.findViewById(R.id.locationsListView)
         nestedScrollView = root.findViewById(R.id.nestedScrollView)
-        linearLayoutManager = LinearLayoutManager(this.context)
-        locationView.layoutManager = linearLayoutManager
+        gridLayoutManager = GridLayoutManager(context, 2)
+        locationView.layoutManager = gridLayoutManager
         buttonBack = root.findViewById(R.id.buttonBack)
         buttonNext = root.findViewById(R.id.buttonNext)
         loadedData = locationsViewModel.loadLiveData()

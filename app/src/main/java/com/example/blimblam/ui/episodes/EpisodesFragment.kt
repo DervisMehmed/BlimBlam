@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blimblam.R
@@ -23,7 +24,7 @@ import java.io.Serializable
 
 class EpisodesFragment : Fragment() {
     private lateinit var episodesViewModel: EpisodesViewModel
-    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var epListCustomAdaptor: EpListCustomAdaptor
     private lateinit var nestedScrollView: NestedScrollView
     private lateinit var epView: RecyclerView
@@ -45,8 +46,8 @@ class EpisodesFragment : Fragment() {
         buttonBack = root.findViewById(R.id.buttonBack)
         buttonNext = root.findViewById(R.id.buttonNext)
         nestedScrollView = root.findViewById(R.id.nestedScrollView)
-        linearLayoutManager = LinearLayoutManager(this.context)
-        epView.layoutManager = linearLayoutManager
+        gridLayoutManager = GridLayoutManager(context, 2)
+        epView.layoutManager = gridLayoutManager
         loadedData = episodesViewModel.loadLiveData()
 
         loadedData.observe(viewLifecycleOwner, Observer {
